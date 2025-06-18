@@ -1,14 +1,25 @@
 
 interface IErrorMessage {
-	message: string | null
+	errorMessage: string | null
+	buttonLabel?: string | undefined
+	buttonOnClick?: () => void
 }
 
-const ErrorMessage: React.FC<IErrorMessage> = ( { message } ) => {
+const ValidationButton: React.FC<IErrorMessage> = ( {
+	errorMessage,
+	buttonLabel=undefined,
+	buttonOnClick=undefined
+} ) => {
 	return <>
-		{ message !== null &&
-			<p className="error-message">{ message }</p>
+		{ errorMessage !== null &&
+			<p className="error-message">{ errorMessage }</p>
+		}
+		{ errorMessage === null && buttonLabel !== undefined &&
+			<button
+				onClick={ buttonOnClick }
+			>{ buttonLabel }</button>
 		}
 	</>
 }
 
-export default ErrorMessage
+export default ValidationButton

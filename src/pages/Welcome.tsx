@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { checkUserPassword, getUserEmailQuery, stringHash, User, useUser, validateEmail, validateName, validatePassword } from "../objects/User"
-import ErrorMessage from "../elements/ErrorMessage"
+import ValidationButton from "../elements/ErrorMessage"
 import { DBget, DBpost } from "../Fetch"
 import { EPage, usePage } from "../objects/Page"
 
@@ -116,7 +116,7 @@ export const WelcomePage: React.FC = () => {
 					} }
 				>Register</button>
 			</>	}
-			<ErrorMessage message={ errorMessage }/>
+			<ValidationButton errorMessage={ errorMessage }/>
 		</> }
 		{ user !== null && <>
 			<h1>Welcome, { user.name }</h1>
