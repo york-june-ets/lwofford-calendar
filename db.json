@@ -1,0 +1,36 @@
+{
+	"users": [
+		{
+			"id": "asdf",
+			"email": "esther.z@geist.cnc",
+			"passhash": 12341234,
+			"name": "Esther Zeitzen"
+		},
+		{
+			"id": "asdf2",
+			"email": "rubin.r@geist.cnc",
+			"passhash": 45674567,
+			"name": "Rubin Redding"
+		}
+	],
+	"events": [
+		{
+			"id": "asdf1",
+			"title": "Wedding Day",
+			"description": "We are getting married today",
+			"timeStart": 0,
+			"timeEnd": 1,
+			"location": "The Fish Bowl, 3920 Rover Ave",
+			"invitees": [
+				{
+					"userId": "asdf",
+					"status": "owner"
+				},
+				{
+					"userId": "asdf2",
+					"status": "invited"
+				}
+			]
+		}
+	]
+}
