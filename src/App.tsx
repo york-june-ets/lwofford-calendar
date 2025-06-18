@@ -1,20 +1,23 @@
 import './App.css';
 import { CurrentPage, EPage, PageProvider, usePage } from './objects/Page';
+import { UserProvider, useUser } from './objects/User';
 
 function App() {
 	return <div className='App-container'>
-		<PageProvider pageDefault={ EPage.CALENDAR }>
-			<Navbar/>
-			<CurrentPage/>
+		<PageProvider pageDefault={ EPage.WELCOME }>
+			<UserProvider>
+				<Navbar/>
+				<CurrentPage/>
+			</UserProvider>
 		</PageProvider>
 	</div>
 }
 
 const Navbar: React.FC = () => {
-	// const { user } = useUser()
+	const { user } = useUser()
 	const { setPage } = usePage()
 
-	return <> {
+	return <> { user !== null &&
 	<nav>
 		<button onClick={ () => setPage( EPage.WELCOME ) }>Welcome</button>
 		<button onClick={ () => setPage( EPage.CALENDAR ) }>Calendar</button>
