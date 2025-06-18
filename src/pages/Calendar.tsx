@@ -31,7 +31,12 @@ export const CalendarPage: React.FC = () => {
 	}
 
 	return <main className="page">
-		{/* <h2>{ NOW.toLocaleString('default', { month: 'long' } ) } { year }</h2> */}
+		<button
+			onClick={ () => {
+
+			} }
+		>New Event</button>
+		<h2>{ NOW.toLocaleString('default', { month: 'long' } ) } { year }</h2>
 		<div className="calendar-grid">
 		{	
 			WEEK_DAY_ABBRS.map(day => (
