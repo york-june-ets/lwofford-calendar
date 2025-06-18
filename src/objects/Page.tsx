@@ -19,8 +19,8 @@ export interface IPageContext {
 
 export const PageContext = createContext<IPageContext | null>(null)
 
-export const PageProvider: React.FC< { children: ReactNode } > = ( { children } ) => {
-	const [ page, setPage ] = useState<EPage>( EPage.WELCOME )
+export const PageProvider: React.FC< { pageDefault?: EPage, children: ReactNode } > = ( { pageDefault=EPage.WELCOME, children } ) => {
+	const [ page, setPage ] = useState<EPage>( pageDefault )
 
 	return <PageContext.Provider value={ { page, setPage } }>
 		{ children }

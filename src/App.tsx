@@ -2,7 +2,7 @@ import './App.css';
 import { CurrentPage, EPage, PageProvider, usePage } from './objects/Page';
 
 function App() {
-	return <PageProvider>
+	return <PageProvider pageDefault={ EPage.CALENDAR }>
 		<Navbar/>
 		<CurrentPage/>
 	</PageProvider>
