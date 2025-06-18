@@ -2,10 +2,12 @@ import './App.css';
 import { CurrentPage, EPage, PageProvider, usePage } from './objects/Page';
 
 function App() {
-	return <PageProvider pageDefault={ EPage.CALENDAR }>
-		<Navbar/>
-		<CurrentPage/>
-	</PageProvider>
+	return <div className='App-container'>
+		<PageProvider pageDefault={ EPage.CALENDAR }>
+			<Navbar/>
+			<CurrentPage/>
+		</PageProvider>
+	</div>
 }
 
 const Navbar: React.FC = () => {
