@@ -1,4 +1,5 @@
 import CalendarDay from '../elements/CalendarDay'
+import { ForceUpdateProvider, useForceUpdate } from '../elements/ForceUpdate'
 import { CreateNewEvent, EventModal, EventProvider, useEvent } from '../objects/Event'
 import { EInviteStatus, Invite } from '../objects/Invite'
 import { useUser } from '../objects/User'
@@ -9,13 +10,16 @@ const WEEK_DAY_ABBRS = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ]
 
 export const CalendarPage: React.FC = () => {	
 	return <EventProvider>
-		<CalendarPageWithEvent />
+		<ForceUpdateProvider>
+			<CalendarPageWithEvent />
+		</ForceUpdateProvider>
 	</EventProvider>
 }
 
 const CalendarPageWithEvent: React.FC = () => {
 	const { user } = useUser()
 	const { event, setEvent } = useEvent()
+	const forceUpdate = useForceUpdate()
 
 	const NOW = new Date()
 	const [ currentDate, setCurrentDate ] = useState<Date>( new Date( NOW.getFullYear(), NOW.getMonth(), 1 ) )

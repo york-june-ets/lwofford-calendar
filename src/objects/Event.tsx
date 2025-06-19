@@ -5,6 +5,7 @@ import { EInviteStatus, Invite, InviteListItem, STATUS_COLORS } from "./Invite"
 import { User, useUser } from "./User"
 import { DBdelete, DBget, DBpatch, DBpost } from "../Fetch"
 import ValidationButton from '../elements/ErrorMessage'
+import { useForceUpdate } from '../elements/ForceUpdate'
 
 export interface Event {
 	id: string | undefined
@@ -82,7 +83,7 @@ export const EventCalendarTile: React.FC<IEventCalendarTile> = ( { event }  ) =>
 export const EventModal: React.FC = () => {
 	const { user } = useUser()
 	const { event, setEvent } = useEvent()
-
+	const forceUpdate = useForceUpdate()
 	
 	const [ title, setTitle ] = useState<string>( event!.title )
 	const [ description, setDescription ] = useState<string>( event!.description )
@@ -111,6 +112,7 @@ export const EventModal: React.FC = () => {
 		event!.invites = invites
 
 		const response = DBpatch<Event>( getEventIdQuery( event! ), event )
+		forceUpdate()
 	}
 
 	const DeleteEvent = async () => {
@@ -125,8 +127,6 @@ export const EventModal: React.FC = () => {
 		let user : User | undefined
 		if (user === undefined) user = ( await DBget<User[]>( `users?name=${ invite }` ) )[0]
 		if (user === undefined) user = ( await DBget<User[]>( `users?email=${ invite }` ) )[0]
-
-		
 
 		if (user === undefined) {
 			setInviteError( `No known user by the name/email '${ invite }'.` )
@@ -161,7 +161,7 @@ export const EventModal: React.FC = () => {
 				type="submit"
 				onClick={ async () => {
 					if (userIsOwner) {
-						CommitChanges()
+						await CommitChanges()
 					}
 					setEvent( null )
 				} }
