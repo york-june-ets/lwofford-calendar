@@ -16,13 +16,8 @@ const CalendarDay: React.FC<ICalendarDay> = ( { date } ) => {
 	const forceUpdate = useForceUpdate()
 	
 	const today : Date = new Date()
-	const isToday : boolean =
-		date !== null &&
-		date.getDate() === today.getDate() &&
-		date.getMonth() === today.getMonth() &&
-		date.getFullYear() === today.getFullYear()
+	const isToday : boolean = datesAreSameDay( date, today )
 
-	const dateString = `${ date?.getFullYear() }-${ ( ( date?.getMonth() ?? -1 ) + 1).toString().padStart( 2, "0" ) }-${ ( ( date?.getDate() ?? -1 ) ).toString().padStart( 2, "0" ) }`
 	const [ events, setEvents ] = useState<Event[]>( [] )
 	const [ eventsLoading, setEventsLoading ] = useState<boolean>( true )
 
@@ -30,8 +25,10 @@ const CalendarDay: React.FC<ICalendarDay> = ( { date } ) => {
 		if ( date === null ) return
 		const getEvents = async () => {
 			try {
-				const response = await DBget<Event[]>( `events?date=${ dateString }` )
-				setEvents( response )
+				const response = await DBget<Event[]>( `events` )
+				setEvents( response.filter( ( event ) => {
+					return datesAreSameDay( date, event.dateTimeStart )
+				} ) )
 			} catch (err) {
 				console.error(err)
 			} finally {
@@ -60,6 +57,17 @@ const CalendarDay: React.FC<ICalendarDay> = ( { date } ) => {
 			} </div>
 		</div>
 	</>
+}
+
+function datesAreSameDay( a: Date | string | null, b: Date | string | null ) : boolean {
+	if (typeof a === "string") a = new Date( a )
+	if (typeof b === "string") b = new Date( b )
+	return (
+		a !== null && b !== null &&
+		a.getDate() === b.getDate() &&
+		a.getMonth() === b.getMonth() &&
+		a.getFullYear() === b.getFullYear()
+	)
 }
 
 export default CalendarDay;

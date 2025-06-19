@@ -28,27 +28,26 @@
   "events": [
     {
       "id": "4e08",
-      "title": "",
-      "description": "",
-      "dateTimeStart": "2025-06-18T17:00:00.000Z",
-      "location": "",
+      "title": "Redding–Zeitzen Wedding",
+      "description": "We are getting married today!",
+      "dateTimeStart": "2025-06-21T17:00:00.000Z",
+      "location": "30 Stardust Ave\nDeck T, IIC Charybdis",
       "invites": [
         {
           "user": "dff3",
           "status": 0
-        }
-      ]
-    },
-    {
-      "id": "249b",
-      "title": "",
-      "description": "",
-      "dateTimeStart": "2025-06-19T21:23:00.692Z",
-      "location": "",
-      "invites": [
+        },
         {
-          "user": "dff3",
-          "status": 0
+          "user": "7aa9",
+          "status": 2
+        },
+        {
+          "user": "6e73",
+          "status": 1
+        },
+        {
+          "user": "1bc0",
+          "status": 3
         }
       ]
     }

@@ -17,12 +17,13 @@ const FancyTextArea: React.FC<IFancyTextArea> = ({
 }) => {
 	const textAreaRef = React.useRef<HTMLTextAreaElement | null>(null)
 
-	const handleInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
+	const handleInput = (event: ChangeEvent<HTMLTextAreaElement> | undefined = undefined) => {
 		const textAreaElement = textAreaRef.current
 		if (textAreaElement) {
 			textAreaElement.style.height = "auto"
 			textAreaElement.style.height = `${textAreaElement.scrollHeight}px`
 		}
+		if (event === undefined) return
 		onChange(event)
 	}
 

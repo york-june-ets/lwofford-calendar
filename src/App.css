@@ -69,6 +69,11 @@ body {
 button {
   margin: 1rem 0.125rem;
   padding: 0.5em 1em;
+
+  background-color: #F9FAFB;
+  border: none;
+  box-shadow: 4px 4px 10px #181F2520;
+  border-radius: 6px;
   font-size: 18pt;
   font-weight: bold;
   font-variant-caps: all-small-caps;

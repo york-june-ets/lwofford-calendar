@@ -90,8 +90,6 @@ export const EventModal: React.FC = () => {
 	const [ location, setLocation ] = useState<string>( event!.location )
 	const [ dateTimeStart, setDateTimeStart ] = useState<Date>( new Date( event!.dateTimeStart ) )
 	const [ invites, setInvites ] = useState<Invite[]>( event!.invites )
-
-	console.log( `Date: ${ dateTimeStart }, type: ${ typeof dateTimeStart } ` )
 	
 	const [ inviteText, setInviteText ] = useState<string>("")
 	const [ inviteError, setInviteError ] = useState<string | null>( null )
@@ -159,15 +157,6 @@ export const EventModal: React.FC = () => {
 
 	return <div className="modal-overlay">
 		<div className="editor">
-			<button
-				type="submit"
-				onClick={ async () => {
-					if (userIsOwner) {
-						await CommitChanges()
-					}
-					setEvent( null )
-				} }
-			>{ userIsOwner ? "Save & Close" : "Close" }</button>
 			<FancyTextArea
 				editable={ userIsOwner }
 				id="title-textarea"
@@ -251,6 +240,15 @@ export const EventModal: React.FC = () => {
 					} }
 				>Decline</button>
 			</> }
+			<button
+				type="submit"
+				onClick={ async () => {
+					if (userIsOwner) {
+						await CommitChanges()
+					}
+					setEvent( null )
+				} }
+			>{ userIsOwner ? "Save & Close" : "Close" }</button>
 		</div>
 	</div>
 }
