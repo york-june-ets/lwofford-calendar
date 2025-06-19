@@ -50,3 +50,44 @@ html, body, #root, main, .page {
   padding: 0;
 }
 
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.editor, .notification {
+  max-width: 400px;
+  width: 80%;
+  
+  padding: 2em;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+  background: #E4EAED;
+  color: #181F25
+}
+
+.editor button {
+  margin: 0.5rem 1rem;
+}
+
+
+.invite-list {
+  display: flex;
+}
+
+.invite-list p {
+  background-color: #FCD29F;
+  padding: 0.5rem;
+  margin: 0 0.125rem;
+  box-shadow: 4px 4px 10px #181F2540;
+  border-radius: 6px;
+}

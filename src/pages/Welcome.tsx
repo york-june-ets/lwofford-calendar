@@ -47,7 +47,7 @@ export const WelcomePage: React.FC = () => {
 		const newUser : User = { id: undefined, email: inputEmail, passhash: stringHash( inputPassword ), name: inputName }
 
 		const response = await DBpost<User>( query, newUser )
-		newUser.id = ( await DBget<User[]>( getUserEmailQuery( newUser ) ) )[0].id
+		newUser.id = response.id
 
 		setUser( newUser )
 		setPage( EPage.CALENDAR )

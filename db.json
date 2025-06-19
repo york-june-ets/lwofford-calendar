@@ -9,20 +9,15 @@
   ],
   "events": [
     {
-      "id": "asdf1",
+      "id": "ebd8",
       "title": "Wedding Day",
-      "description": "We are getting married today",
-      "timeStart": 0,
-      "timeEnd": 1,
-      "location": "The Fish Bowl, 3920 Rover Ave",
-      "invitees": [
+      "description": "We are gettin married today",
+      "date": "2025-06-19",
+      "location": "Somewhere",
+      "invites": [
         {
-          "userId": "asdf",
-          "status": "owner"
-        },
-        {
-          "userId": "asdf2",
-          "status": "invited"
+          "userId": "dff3",
+          "status": 0
         }
       ]
     }

@@ -1,3 +1,5 @@
+import './Settings.css'
+
 import { useState } from "react"
 import ValidationButton from "../elements/ErrorMessage"
 import { EPage, usePage } from "../objects/Page"

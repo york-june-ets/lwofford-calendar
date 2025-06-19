@@ -3,6 +3,7 @@ import React, { ChangeEvent } from "react";
 interface IFancyTextArea {
 	value: string
 	onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void
+	editable?: boolean
 	id?: string
 	placeholder?: string
 }
@@ -11,6 +12,7 @@ const FancyTextArea: React.FC<IFancyTextArea> = ({
 	value,
 	onChange,
 	id,
+	editable = true,
 	placeholder = "Write something down..."
 }) => {
 	const textAreaRef = React.useRef<HTMLTextAreaElement | null>(null)
@@ -25,6 +27,7 @@ const FancyTextArea: React.FC<IFancyTextArea> = ({
 	}
 
 	return <textarea
+		contentEditable={ editable }
 		className="auto-textarea"
 		id={id}
 		ref={textAreaRef}

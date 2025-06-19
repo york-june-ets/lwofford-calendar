@@ -1,10 +1,21 @@
 import CalendarDay from '../elements/CalendarDay'
+import { CreateNewEvent, EventModal, EventProvider, useEvent } from '../objects/Event'
+import { useUser } from '../objects/User'
 import './Calendar.css'
 import { useState } from "react"
 
 const WEEK_DAY_ABBRS = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ]
 
-export const CalendarPage: React.FC = () => {
+export const CalendarPage: React.FC = () => {	
+	return <EventProvider>
+		<CalendarPageWithEvent />
+	</EventProvider>
+}
+
+const CalendarPageWithEvent: React.FC = () => {
+	const { user } = useUser()
+	const { event, setEvent } = useEvent()
+
 	const NOW = new Date()
 	const [ currentDate, setCurrentDate ] = useState<Date>( new Date( NOW.getFullYear(), NOW.getMonth(), 1 ) )
 
@@ -32,24 +43,28 @@ export const CalendarPage: React.FC = () => {
 
 	return <main className="page">
 		<button
-			onClick={ () => {
-
+			onClick={ async () => {
+				const newEvent = await CreateNewEvent( user! )
+				setEvent( newEvent! )
 			} }
-		>New Event</button>
+			>New Event</button>
 		<h2>{ NOW.toLocaleString('default', { month: 'long' } ) } { year }</h2>
 		<div className="calendar-grid">
 		{	
 			WEEK_DAY_ABBRS.map(day => (
-				<div key={day} className="calendar-header">{day}</div>
+				<div key={day} className="calendar-header">{ day }</div>
 			) )
 		}
 		{	
 			weeks.map( ( week, i ) => (
 				week.map( ( date, j ) => {
-					return <CalendarDay key={`${i}-${j}`} date={date} />
+					return <CalendarDay key={`${ i }-${ j }`} date={ date } />
 				} )
 			) )
 		}
 		</div>
+		{ event !== null &&
+			<EventModal />
+		}
 	</main>
 }

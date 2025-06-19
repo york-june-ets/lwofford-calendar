@@ -6,6 +6,7 @@ function App() {
 	return <div className='App-container'>
 		<PageProvider pageDefault={ EPage.WELCOME }>
 			<UserProvider>
+				
 				<Navbar/>
 				<CurrentPage/>
 			</UserProvider>
