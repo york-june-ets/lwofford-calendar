@@ -11,7 +11,7 @@ export interface Event {
 	id: string | undefined
 	title: string
 	description: string
-	date: string
+	dateTimeStart: Date
 	location: string
 	invites: Invite[]
 }
@@ -49,7 +49,7 @@ export const CreateNewEvent = async ( owner: User ): Promise<Event> => {
 		id: undefined,
 		title: "",
 		description: "",
-		date: new Date().toLocaleDateString(),
+		dateTimeStart: new Date(),
 		location: "",
 		invites: [ ownerInvite ],
 	}
@@ -88,8 +88,10 @@ export const EventModal: React.FC = () => {
 	const [ title, setTitle ] = useState<string>( event!.title )
 	const [ description, setDescription ] = useState<string>( event!.description )
 	const [ location, setLocation ] = useState<string>( event!.location )
-	const [ date, setDate ] = useState<string>( event!.date )
+	const [ dateTimeStart, setDateTimeStart ] = useState<Date>( new Date( event!.dateTimeStart ) )
 	const [ invites, setInvites ] = useState<Invite[]>( event!.invites )
+
+	console.log( `Date: ${ dateTimeStart }, type: ${ typeof dateTimeStart } ` )
 	
 	const [ inviteText, setInviteText ] = useState<string>("")
 	const [ inviteError, setInviteError ] = useState<string | null>( null )
@@ -108,7 +110,7 @@ export const EventModal: React.FC = () => {
 		event!.title = title
 		event!.description = description
 		event!.location = location
-		event!.date = date
+		event!.dateTimeStart = dateTimeStart
 		event!.invites = invites
 
 		const response = DBpatch<Event>( getEventIdQuery( event! ), event )
@@ -185,12 +187,11 @@ export const EventModal: React.FC = () => {
 			/>
 			{/* <h4>Date</h4> */}
 			<input
-				type='date'
+				type='datetime-local'
 				disabled={ !userIsOwner }
-				value={ date }
+				value={ dateToInputString( dateTimeStart ) }
 				onChange={ (e) => {
-					console.log( e.target.value )
-					setDate( e.target.value )
+					setDateTimeStart( new Date( e.target.value ) )
 				} }
 			/>
 			<h2>Location</h2>
@@ -256,4 +257,16 @@ export const EventModal: React.FC = () => {
 
 export function getEventIdQuery( event: Event ): string {
 	return `events/${ event.id }`
+}
+
+function dateToInputString( date: Date ): string {
+  const pad = (n: number) => n.toString().padStart(2, '0')
+
+  const year = date.getFullYear()
+  const month = pad(date.getMonth() + 1)
+  const day = pad(date.getDate())
+  const hours = pad(date.getHours())
+  const minutes = pad(date.getMinutes())
+
+  return `${year}-${month}-${day}T${hours}:${minutes}`
 }

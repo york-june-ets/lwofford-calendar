@@ -27,10 +27,10 @@
   ],
   "events": [
     {
-      "id": "e623",
+      "id": "4e08",
       "title": "",
       "description": "",
-      "date": "6/19/2025",
+      "dateTimeStart": "2025-06-18T17:00:00.000Z",
       "location": "",
       "invites": [
         {
@@ -40,66 +40,15 @@
       ]
     },
     {
-      "id": "9dff",
-      "title": "New Event!",
+      "id": "249b",
+      "title": "",
       "description": "",
-      "date": "6/19/2025",
+      "dateTimeStart": "2025-06-19T21:23:00.692Z",
       "location": "",
       "invites": [
         {
           "user": "dff3",
           "status": 0
-        }
-      ]
-    },
-    {
-      "id": "5835",
-      "title": "1234",
-      "description": "",
-      "date": "2025-06-10",
-      "location": "",
-      "invites": [
-        {
-          "user": "dff3",
-          "status": 0
-        }
-      ]
-    },
-    {
-      "id": "ab08",
-      "title": "asdfasdf",
-      "description": "",
-      "date": "2025-06-13",
-      "location": "",
-      "invites": [
-        {
-          "user": "dff3",
-          "status": 0
-        }
-      ]
-    },
-    {
-      "id": "5afd",
-      "title": "Wedding",
-      "description": "",
-      "date": "2025-06-19",
-      "location": "",
-      "invites": [
-        {
-          "user": "dff3",
-          "status": 0
-        },
-        {
-          "user": "7aa9",
-          "status": 2
-        },
-        {
-          "user": "6e73",
-          "status": 1
-        },
-        {
-          "user": "1bc0",
-          "status": 3
         }
       ]
     }
