@@ -149,7 +149,9 @@ export const EventModal: React.FC = () => {
 	const UpdateInviteStatus = async ( status: EInviteStatus ) => {
 		myInvite!.status = status
 		setMyInvite( myInvite! )
-		setInvites( invites )
+		setInvites( [ ...invites.filter( (invite) => {
+			return invite.user !== myInvite!.user
+		} ), myInvite! ] )
 		await CommitChanges()
 	}
 
