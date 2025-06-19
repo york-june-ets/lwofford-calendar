@@ -10,8 +10,8 @@ export enum EInviteStatus {
 }
 
 export const STATUS_COLORS = [
-	"#5CEBAD",
-	"#F4F5F6",
+	"#B5D2F3",
+	"#F9FAFB",
 	"#5CEBAD",
 	"#F6ACA2",
 ]

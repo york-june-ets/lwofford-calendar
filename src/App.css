@@ -127,13 +127,16 @@ textarea {
 
 .invite-list {
   display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
 .invite-list p {
   background-color: #FCD29F;
   padding: 0.5rem;
-  margin: 0 0.125rem;
-  box-shadow: 4px 4px 10px #181F2540;
+  margin: 0;
+  box-shadow: 4px 4px 10px #181F2520;
   border-radius: 6px;
 }
 
