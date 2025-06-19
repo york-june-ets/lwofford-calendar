@@ -1,5 +1,6 @@
 import CalendarDay from '../elements/CalendarDay'
 import { CreateNewEvent, EventModal, EventProvider, useEvent } from '../objects/Event'
+import { EInviteStatus, Invite } from '../objects/Invite'
 import { useUser } from '../objects/User'
 import './Calendar.css'
 import { useState } from "react"

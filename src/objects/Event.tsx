@@ -1,9 +1,10 @@
 import './Event.css'
-import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from "react"
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react"
 import FancyTextArea from "../elements/FancyTextArea"
-import { EInviteStatus, Invite, STATUS_COLORS } from "./Invite"
+import { EInviteStatus, Invite, InviteListItem, STATUS_COLORS } from "./Invite"
 import { User, useUser } from "./User"
-import { DBget, DBpatch, DBpost } from "../Fetch"
+import { DBdelete, DBget, DBpatch, DBpost } from "../Fetch"
+import ValidationButton from '../elements/ErrorMessage'
 
 export interface Event {
 	id: string | undefined
@@ -40,7 +41,7 @@ export const useEvent = () => {
 
 export const CreateNewEvent = async ( owner: User ): Promise<Event> => {
 	const ownerInvite: Invite = {
-		userId: owner.id!,
+		user: owner.id!,
 		status: EInviteStatus.OWNER,
 	}
 	const result: Event = {
@@ -82,15 +83,25 @@ export const EventModal: React.FC = () => {
 	const { user } = useUser()
 	const { event, setEvent } = useEvent()
 
-	const userIsOwner = true
-
+	
 	const [ title, setTitle ] = useState<string>( event!.title )
 	const [ description, setDescription ] = useState<string>( event!.description )
 	const [ location, setLocation ] = useState<string>( event!.location )
 	const [ date, setDate ] = useState<string>( event!.date )
 	const [ invites, setInvites ] = useState<Invite[]>( event!.invites )
-
+	
 	const [ inviteText, setInviteText ] = useState<string>("")
+	const [ inviteError, setInviteError ] = useState<string | null>( null )
+	
+	const [ myInvite, setMyInvite ] = useState<Invite | undefined>(
+		event!.invites.reduce<Invite | undefined>( (r, i) => {
+			if ( user!.id !== i.user ) return r
+			return i
+		}, undefined )
+	)	
+	
+	const userIsOwner = myInvite && myInvite.status === EInviteStatus.OWNER	
+	const userIsInvited = myInvite && !userIsOwner
 
 	const CommitChanges = async () => {
 		event!.title = title
@@ -99,16 +110,47 @@ export const EventModal: React.FC = () => {
 		event!.date = date
 		event!.invites = invites
 
-		const response = DBpatch( getEventIdQuery( event! ), event )
-		setEvent( event! )
+		const response = DBpatch<Event>( getEventIdQuery( event! ), event )
 	}
 
-	const DeleteNote = async () => {
+	const DeleteEvent = async () => {
 		setEvent( null )
+
+		await DBdelete( getEventIdQuery( event! ) )
 	}
 
 	const AddInvite = async ( invite: string, status = EInviteStatus.INVITED ) => {
+		setInviteText("")
+		
+		let user : User | undefined
+		if (user === undefined) user = ( await DBget<User[]>( `users?name=${ invite }` ) )[0]
+		if (user === undefined) user = ( await DBget<User[]>( `users?email=${ invite }` ) )[0]
 
+		
+
+		if (user === undefined) {
+			setInviteError( `No known user by the name/email '${ invite }'.` )
+			return
+		}
+		if ( invites.some( ( invite ) => invite.user === user!.id ) ) {
+			setInviteError( `${ user!.name } has already been invited!` )
+			return
+		}
+
+		const newInvite : Invite = {
+			user: user.id!,
+			status: status
+		}
+		setInvites( [ ...invites, newInvite ] )
+
+		await CommitChanges()
+	}
+
+	const UpdateInviteStatus = async ( status: EInviteStatus ) => {
+		myInvite!.status = status
+		setMyInvite( myInvite! )
+		setInvites( invites )
+		await CommitChanges()
 	}
 
 	return <div className="modal-overlay">
@@ -139,16 +181,17 @@ export const EventModal: React.FC = () => {
 					setDescription( e.target.value )
 				} }
 			/>
-			<h4>Date</h4>
+			{/* <h4>Date</h4> */}
 			<input
 				type='date'
+				disabled={ !userIsOwner }
 				value={ date }
 				onChange={ (e) => {
 					console.log( e.target.value )
 					setDate( e.target.value )
 				} }
 			/>
-			<h4>Location</h4>
+			<h2>Location</h2>
 			<FancyTextArea
 				editable={ userIsOwner }
 				placeholder="Location..."
@@ -157,18 +200,12 @@ export const EventModal: React.FC = () => {
 					setLocation( e.target.value )
 				} }
 			/>
-			<h4>Invitees</h4>
+			<h2>Invitees</h2>
 			<div className="invite-list">{
-				// invites.map( ( invite ) => {
-				// 	const inviteUser = await DBget<User>( `users/${ invite.userId }` )
-
-				// 	return <p
-				// 		className="invite-tag"
-				// 		style={ { backgroundColor: STATUS_COLORS[ invite.status ] } }
-				// 		title={ `${inviteUser.name} <${ inviteUser.email }>: ${ STATUS_COLORS[ invite.status ] }` }
-				// 	>{ inviteUser.name }</p>
-				// } )
-			}</div>
+				invites.map( ( invite ) => {
+					return <InviteListItem key={ invite.user } invite={ invite } />
+				} )
+			} </div>
 			{ userIsOwner && <>
 				<form
 					onSubmit={ (e) => {
@@ -182,20 +219,34 @@ export const EventModal: React.FC = () => {
 						value={ inviteText }
 						onChange={ (e) => {
 							setInviteText( e.target.value )
+							setInviteError( null )
 						} }
 					/>
 				</form>
-				<button 
-					type="submit"
-					onClick={ async () => {
+				<ValidationButton
+					errorMessage={ inviteError }
+					buttonLabel='Send Invite'
+					buttonOnClick={ async () => {
 						await AddInvite( inviteText )
 					} }
-				>Send Invite</button>
+				/>
 				<button
 					onClick={ () => {
-						DeleteNote()
+						DeleteEvent()
 					} }
 				>Delete</button>
+			</> }
+			{ userIsInvited && <>
+				<button
+					onClick={ () => {
+						UpdateInviteStatus( EInviteStatus.ACCEPTED )
+					} }
+					>Accept</button>
+				<button
+					onClick={ () => {
+						UpdateInviteStatus( EInviteStatus.DECLINED )
+					} }
+				>Decline</button>
 			</> }
 		</div>
 	</div>

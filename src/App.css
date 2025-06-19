@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Huninn&display=swap');
+
 .App {
   text-align: center;
 }
@@ -50,6 +52,49 @@ html, body, #root, main, .page {
   padding: 0;
 }
 
+* {
+  font-family: "Huninn", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  padding: 1em;
+  height: 100%;
+
+  background-color: #323548;
+  color: #E4EAED
+}
+
+button {
+  margin: 1rem 0.125rem;
+  padding: 0.5em 1em;
+  font-size: 18pt;
+  font-weight: bold;
+  font-variant-caps: all-small-caps;
+}
+
+textarea {
+  width: 100%;
+  overflow: hidden;
+  resize: none;
+  
+  /* padding: 10px; */
+  font-size: 1rem;
+
+  background: none;
+  border: none;
+  outline: none;
+
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
+#title-textarea {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -90,4 +135,8 @@ html, body, #root, main, .page {
   margin: 0 0.125rem;
   box-shadow: 4px 4px 10px #181F2540;
   border-radius: 6px;
+}
+
+.error-message {
+  color:red
 }

@@ -27,7 +27,7 @@ const FancyTextArea: React.FC<IFancyTextArea> = ({
 	}
 
 	return <textarea
-		contentEditable={ editable }
+		disabled={ !editable }
 		className="auto-textarea"
 		id={id}
 		ref={textAreaRef}

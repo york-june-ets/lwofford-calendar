@@ -7,10 +7,22 @@
   height: 100%;
 }
 
+
 .calendar-header {
+  text-align: center;
   font-weight: bold;
-  background-color: #f0f0f0;
+  background-color: #101020;
   padding: 8px;
+}
+
+.calendar-header:first-child {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.calendar-header:nth-child(7) {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
 .calendar-cell {
@@ -23,7 +35,7 @@
 
 
 .today {
-  background-color: #cce5ff;
+  background-color: #4A6582;
   /* color: white; */
   border-radius: 12px;
   /* margin: 4px; */

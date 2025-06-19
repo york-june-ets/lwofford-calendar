@@ -5,19 +5,97 @@
       "email": "e.zeitzen@geist.cnc",
       "passhash": 56685125,
       "name": "Esther Zeitzen"
+    },
+    {
+      "id": "7aa9",
+      "email": "r.redding@geist.cnc",
+      "passhash": 56685125,
+      "name": "Rubin Redding"
+    },
+    {
+      "id": "6e73",
+      "email": "a.zeitzen@geist.cnc",
+      "passhash": 56685125,
+      "name": "Abraham Zeitzen"
+    },
+    {
+      "id": "1bc0",
+      "email": "b.supergar@msf.gov",
+      "passhash": 56685125,
+      "name": "Beatrix Supergar"
     }
   ],
   "events": [
     {
-      "id": "ebd8",
-      "title": "Wedding Day",
-      "description": "We are gettin married today",
-      "date": "2025-06-19",
-      "location": "Somewhere",
+      "id": "e623",
+      "title": "",
+      "description": "",
+      "date": "6/19/2025",
+      "location": "",
       "invites": [
         {
-          "userId": "dff3",
+          "user": "dff3",
           "status": 0
+        }
+      ]
+    },
+    {
+      "id": "9dff",
+      "title": "New Event!",
+      "description": "",
+      "date": "6/19/2025",
+      "location": "",
+      "invites": [
+        {
+          "user": "dff3",
+          "status": 0
+        }
+      ]
+    },
+    {
+      "id": "5835",
+      "title": "1234",
+      "description": "",
+      "date": "2025-06-11",
+      "location": "",
+      "invites": [
+        {
+          "user": "dff3",
+          "status": 0
+        }
+      ]
+    },
+    {
+      "id": "ab08",
+      "title": "asdfasdf",
+      "description": "",
+      "date": "2025-06-13",
+      "location": "",
+      "invites": [
+        {
+          "user": "dff3",
+          "status": 0
+        }
+      ]
+    },
+    {
+      "id": "5afd",
+      "title": "Wedding",
+      "description": "",
+      "date": "2025-06-19",
+      "location": "",
+      "invites": [
+        {
+          "user": "dff3",
+          "status": 0
+        },
+        {
+          "user": "7aa9",
+          "status": 3
+        },
+        {
+          "user": "1bc0",
+          "status": 1
         }
       ]
     }
