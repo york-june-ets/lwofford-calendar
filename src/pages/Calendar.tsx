@@ -47,13 +47,32 @@ const CalendarPageWithEvent: React.FC = () => {
 	}
 
 	return <main className="page">
-		<button
-			onClick={ async () => {
-				const newEvent = await CreateNewEvent( user! )
-				setEvent( newEvent! )
-			} }
+		<div style={ { display: "flex", gap: "10px", alignItems: "center", justifyContent: "center" } }>
+			<button 
+				style={ { marginRight: "auto" } }
+				onClick={ () => {
+					setCurrentDate(
+						new Date( currentDate.getFullYear(), currentDate.getMonth() - 1, 1 )
+					)
+				} }
+			>◀️</button>
+			<button
+			>{ currentDate.toLocaleString('default', { month: 'long' } ) } { year }</button>
+			<button
+				onClick={ async () => {
+					const newEvent = await CreateNewEvent( user! )
+					setEvent( newEvent! )
+				} }
 			>New Event</button>
-		<h2>{ NOW.toLocaleString('default', { month: 'long' } ) } { year }</h2>
+			<button
+				style={ { marginLeft: "auto" } }
+				onClick={ () => {
+					setCurrentDate(
+						new Date( currentDate.getFullYear(), currentDate.getMonth() + 1, 1 )
+					)
+				} }
+			>▶️</button>
+		</div>		
 		<div className="calendar-grid">
 		{	
 			WEEK_DAY_ABBRS.map(day => (
