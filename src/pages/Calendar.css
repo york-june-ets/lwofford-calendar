@@ -13,6 +13,7 @@
   font-weight: bold;
   background-color: #101020;
   padding: 8px;
+  /* font-family: Agdasima; */
 }
 
 .calendar-header:first-child {
@@ -31,6 +32,13 @@
   border-right: 2px dotted #00000010; */
   /* min-height: 0px; */
   height: 100%;
+}
+
+.calendar-cell > p {
+  font-family: Agdasima;
+  /* font-weight: bold; */
+  font-size: 16pt;
+  margin-top: 6px;
 }
 
 

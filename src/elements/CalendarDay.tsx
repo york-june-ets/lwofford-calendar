@@ -4,7 +4,6 @@ import './../pages/Calendar.css'
 import { Event, EventCalendarTile } from '../objects/Event'
 import { EInviteStatus, Invite } from '../objects/Invite'
 import { useUser } from '../objects/User'
-import { useForceUpdate } from './ForceUpdate'
 
 
 interface ICalendarDay {
@@ -13,7 +12,6 @@ interface ICalendarDay {
 
 const CalendarDay: React.FC<ICalendarDay> = ( { date } ) => {
 	const { user } = useUser()
-	const forceUpdate = useForceUpdate()
 	
 	const today : Date = new Date()
 	const isToday : boolean = datesAreSameDay( date, today )
