@@ -1,0 +1,8 @@
+
+.event-list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin: 0 auto;
+	width: 66%;
+}

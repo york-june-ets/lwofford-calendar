@@ -50,7 +50,11 @@
 }
 
 .scrollable {
+  display: flex;
+  flex-direction: column;
   /* height: 55%; */
   overflow-y: auto;
   /* border: 1px solid #ddd; */
+  margin-bottom: 10px;
+  gap: 6px;
 }

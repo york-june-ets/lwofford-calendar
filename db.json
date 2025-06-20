@@ -55,7 +55,7 @@
       "id": "a3a0",
       "title": "asdf",
       "description": "asdf",
-      "dateTimeStart": "2025-06-20T14:09:00.000Z",
+      "dateTimeStart": null,
       "location": "",
       "invites": [
         {
@@ -68,7 +68,33 @@
       "id": "f318",
       "title": "Something Amazing",
       "description": "",
-      "dateTimeStart": "2025-06-19T14:09:00.000Z",
+      "dateTimeStart": "2025-06-08T14:09:00.000Z",
+      "location": "",
+      "invites": [
+        {
+          "user": "dff3",
+          "status": 0
+        }
+      ]
+    },
+    {
+      "id": "cb85",
+      "title": "",
+      "description": "",
+      "dateTimeStart": "2025-06-20T15:47:27.707Z",
+      "location": "",
+      "invites": [
+        {
+          "user": "dff3",
+          "status": 0
+        }
+      ]
+    },
+    {
+      "id": "269b",
+      "title": "",
+      "description": "",
+      "dateTimeStart": "2025-06-20T16:28:34.290Z",
       "location": "",
       "invites": [
         {

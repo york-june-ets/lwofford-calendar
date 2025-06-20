@@ -61,12 +61,15 @@ export const CreateNewEvent = async ( owner: User ): Promise<Event> => {
 	return result
 }
 
-interface IEventCalendarTile {
+interface IEventTile {
 	event: Event
 }
 
-export const EventCalendarTile: React.FC<IEventCalendarTile> = ( { event }  ) => {
+export const EventCalendarTile: React.FC<IEventTile> = ( { event }  ) => {
 	const { setEvent } = useEvent()
+
+	const date = new Date( event.dateTimeStart )
+	const timeString = `${ date.getHours() }:${ date.getMinutes().toString().padStart( 2, "0" ) }`
 
 	return <div
 		className="event-tile"
@@ -75,9 +78,26 @@ export const EventCalendarTile: React.FC<IEventCalendarTile> = ( { event }  ) =>
 		} }
 	>
 		<h5>{ event.title !== "" ? event.title : "New Event" }</h5>
-		{/* <p>{ event.date.toString() }</p> */}
+		<p>{ timeString }</p>
 	</div>
 }
+
+export const EventListTile: React.FC<IEventTile> = ( { event } ) => {
+	const { setEvent } = useEvent()
+
+	const date = new Date( event.dateTimeStart )
+	const timeString = `${ date.getFullYear() }-${ ( date.getMonth() + 1 ).toString().padStart( 2, "0" ) }-${ date.getDate().toString().padStart( 2, "0" ) } at ${ date.getHours() }:${ date.getMinutes().toString().padStart( 2, "0" ) }`
+
+	return <div
+		className='event-tile'
+		onClick={ () => {
+			setEvent( event )
+		} }
+	>
+		<h2>{ event.title !== "" ? event.title : "New Event" }</h2>
+		<p>Begins on { timeString }</p>
+	</div>
+} 
 
 export const EventModal: React.FC = () => {
 	const { user } = useUser()
