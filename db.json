@@ -50,6 +50,32 @@
           "status": 3
         }
       ]
+    },
+    {
+      "id": "a3a0",
+      "title": "asdf",
+      "description": "asdf",
+      "dateTimeStart": "2025-06-19T14:09:00.000Z",
+      "location": "",
+      "invites": [
+        {
+          "user": "dff3",
+          "status": 0
+        }
+      ]
+    },
+    {
+      "id": "f318",
+      "title": "Something Amazing",
+      "description": "",
+      "dateTimeStart": "2025-06-20T14:09:50.857Z",
+      "location": "",
+      "invites": [
+        {
+          "user": "dff3",
+          "status": 0
+        }
+      ]
     }
   ]
 }

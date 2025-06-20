@@ -36,7 +36,7 @@ const CalendarDay: React.FC<ICalendarDay> = ( { date } ) => {
 			}
 		}
 		getEvents()
-	}, [])
+	}, [ events ])
 
 	if ( date === null ) return <></>
 	if ( eventsLoading ) return <></>
